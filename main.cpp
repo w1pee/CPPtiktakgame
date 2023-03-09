@@ -16,47 +16,59 @@ class game
 
             int n1 = 0;
             int n2 = 0;
-
-            if (input.length() != 2)
-            {
-                return -1;
-            }
             char chars[9] = {'a','b','c','d','e','f','g','h','i'};
             for (int i = 0; i < 9; i++)
             {
-                if(chars[i] == input.at(i)){
+                if(chars[i] == input.at(0)){
                     n1 = i;
                 }
             }
+            n2 = stringTOint(input);
+            // cout << n1 << "|" << n2 << "|";
+            return (n1 * FieldSize) + n2;
+        }
+        int quad(int num, int q){
+            int number = 1;
+            for (int i = 0; i < q; i++)
+            {
+                number *= num;
+            }
+            return number;
+        }
+
+        int stringTOint(string text){
+    
+            int num = 0;
+            char  nums[10] = {'0','1','2','3','4','5','6','7','8','9'};
+            int k = 0;
+            bool test = false;
+
+            for (int i = text.length()-1; i >= 0; i--)
+            {
+                cout << endl;
+                for (int j = 0; j < 10 && test == false; j++)
+                {
+                    if (text.at(i) == nums[j])
+                    {
+                        num += j * quad(10,k);
+                        test=true;
+                    }
+                }
+                test=false;
+                k++;
+            }
+            return num;
         }
 };
 int main(){
 
-    game MyGame(9);
+    game MyGame(3);
+
+    string input;
+    cout << "input: ";
+    cin >> input;
+    cout << MyGame.interpret(input);
+    
     return 0;
 }
 
-int stringTOint(string text){
-
-    int num = 0;
-    char  nums[10] = {'0','1','2','3','4','5','6','7','8','9'};
-
-    for (int i = 0; i < text.length(); i++)
-            {
-                for (int j = 0; j < 10; j++)
-                {
-                    if(text.at(j) == nums[j]){
-                        num += num * quad(10,i+1);
-                    }
-                }
-            }
-}
-
-int quad(int num, int q){
-    int num;
-    for (int i = 0; i < q; i++)
-    {
-        num *= num;
-    }
-    return num;
-}
