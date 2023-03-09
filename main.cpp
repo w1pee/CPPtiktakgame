@@ -40,10 +40,14 @@ int stringTOint(string text){
 
     int num = 0;
     char  nums[10] = {'0','1','2','3','4','5','6','7','8','9'};
-    for (int i = 0; i <= 9; i++)
+
+    for (int i = 0; i < text.length(); i++)
             {
-                if(nums[i] == text.at(i)){
-                    num += ;
+                for (int j = 0; j < 10; j++)
+                {
+                    if(text.at(j) == nums[j]){
+                        num += num * quad(10,i+1);
+                    }
                 }
             }
 }
@@ -54,5 +58,5 @@ int quad(int num, int q){
     {
         num *= num;
     }
-    
+    return num;
 }
