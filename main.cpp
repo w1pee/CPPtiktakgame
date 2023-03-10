@@ -51,7 +51,7 @@ class game
             return num;
         }
         bool checkfield(int field){
-            if (Field[field-1] == 0){return false;}
+            if (Field[field-1] == 0){return true;}
             return false;
         }
         void writefield(int field,int player){
@@ -67,22 +67,21 @@ class game
 };
 int main(){
     game MyGame(5);
-    string input;
     //checks if the square to be filled is already occupied
     bool check = false;
-    while (check == false);
+    int user = 1;
+    while (check == false)
     {
-        cout << "input: ";
+        cout << ">>";
+        string input;
         cin >> input;
         check = MyGame.checkfield(MyGame.interpret(input));
+        MyGame.writefield(MyGame.interpret(input),user);
+        user++;
         if (check == false)
         {
-            cout << "square is already occupied!" << endl;
+            cout << "already occupied! try again." << endl;
         }
-        cout << "checked";
     }
-    int player = 1;
-    
     return 0;
 }
-
