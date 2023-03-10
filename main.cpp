@@ -50,13 +50,39 @@ class game
             }
             return num;
         }
+        bool checkfield(int field){
+            if (Field[field-1] == 0){return false;}
+            return false;
+        }
+        void writefield(int field,int player){
+            Field[field-1] = whatplayer(player);
+        }
+        int whatplayer(int player){
+            if (player % 2 != 0){return 1;}
+            return 2;
+        }
+        int isgamewon(){
+            return 0;
+        }
 };
 int main(){
     game MyGame(5);
     string input;
-    cout << "input: ";
-    cin >> input;
-    cout << "field: "<< MyGame.interpret(input);
+    //checks if the square to be filled is already occupied
+    bool check = false;
+    while (check == false);
+    {
+        cout << "input: ";
+        cin >> input;
+        check = MyGame.checkfield(MyGame.interpret(input));
+        if (check == false)
+        {
+            cout << "square is already occupied!" << endl;
+        }
+        cout << "checked";
+    }
+    int player = 1;
+    
     return 0;
 }
 
