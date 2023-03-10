@@ -12,16 +12,15 @@ class game
         }
         int interpret(string input){
             int n1 = 0;
-            int n2 = 0;
             char chars[9] = {'a','b','c','d','e','f','g','h','i'};
+            char chars2[9] = {'A','B','C','D','E','F','G','H','I'};
             for (int i = 0; i < 9; i++)
             {
-                if(chars[i] == input.at(0)){
+                if(chars[i] == input.at(0) || chars2[i] == input.at(0)){
                     n1 = i;
                 }
             }
-            n2 = stringTOint(input);
-            return (n1 * FieldSize) + n2;
+            return (n1 * FieldSize) + stringTOint(input);
         }
         int quad(int num, int q){
             int number = 1;
@@ -38,7 +37,6 @@ class game
             bool test = false;
             for (int i = text.length()-1; i >= 0; i--)
             {
-                cout << endl;
                 for (int j = 0; j < 10 && test == false; j++)
                 {
                     if (text.at(i) == nums[j])
@@ -54,11 +52,11 @@ class game
         }
 };
 int main(){
-    game MyGame(3);
+    game MyGame(5);
     string input;
     cout << "input: ";
     cin >> input;
-    cout << MyGame.interpret(input);
+    cout << "field: "<< MyGame.interpret(input);
     return 0;
 }
 
