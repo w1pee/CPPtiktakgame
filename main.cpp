@@ -51,37 +51,80 @@ class game
             return num;
         }
         bool checkfield(int field){
-            if (Field[field-1] == 0){return true;}
+            if (Field[field] == 0){return true;}
             return false;
         }
         void writefield(int field,int player){
-            Field[field-1] = whatplayer(player);
+            Field[field] = whatplayer(player);
         }
         int whatplayer(int player){
             if (player % 2 != 0){return 1;}
             return 2;
         }
         int isgamewon(){
+            for (int i = 0; i <= FieldSize * FieldSize; i++)
+            {
+                checkfield(i);
+            }
+            
             return 0;
+        }
+        bool checksquares(int field){
+            for (int i = 0; i < FieldSize; i++)
+            {
+                checksquare(field);
+            }
+        }
+        int checksquare(int Field){
+            switch (Field)
+            {
+            case 1:
+                return Field - FieldSize + 1;
+            case 2:
+                return Field - FieldSize;
+            case 3:
+                return Field - FieldSize + 1;
+            case 4:
+                return Field + 1;
+            case 5:
+                return Field + FieldSize + 1;
+            case 6:
+                return Field + FieldSize;
+            case 7:
+                return Field + FieldSize - 1;
+            case 8:
+                return Field - 1;
+            default:
+                cout << "Error: trying to check field that does not exist";
+                return 0;
+            }
         }
 };
 int main(){
-    game MyGame(5);
+    game MyGame(10);
     //checks if the square to be filled is already occupied
     bool check = false;
     int user = 1;
-    while (check == false)
+    
+    bool gameover = false;
+
+    while (gameover == false)
     {
-        cout << ">>";
-        string input;
-        cin >> input;
-        check = MyGame.checkfield(MyGame.interpret(input));
-        MyGame.writefield(MyGame.interpret(input),user);
-        user++;
-        if (check == false)
+        while (check == false)
         {
-            cout << "already occupied! try again." << endl;
+            cout << ">>";
+            string input;
+            cin >> input;
+            check = MyGame.checkfield(MyGame.interpret(input));
+            MyGame.writefield(MyGame.interpret(input),user);
+            user++;
+            if (check == false)
+            {
+                cout << "already occupied! try again." << endl;
+            }
         }
+
     }
+    
     return 0;
 }
