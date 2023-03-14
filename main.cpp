@@ -5,7 +5,7 @@ class game
 {
     public: 
         int FieldSize;
-        int Field[81];
+        int Field[9];
         game(int size){
             FieldSize = size;
             for (int i = 0; i < 81; i++){Field[i] = 0;}
@@ -61,60 +61,24 @@ class game
             if (player % 2 != 0){return 1;}
             return 2;
         }
-        bool isgamewon(){
-            int n = 1;
-
-            for (int i = 0; i < FieldSize; i++)
-            {
-                if (Field[i] == n && Field[i] + (FieldSize * (FieldSize - 1)) == n)
-                {
-                    int c = 0;
-                    for (int j = 1; j < Field[i] + (FieldSize * (FieldSize - 1)); j += FieldSize)
-                    {
-                        if(Field[j] == n){
-                            c++;
-                        }
-                        if (c == FieldSize)
-                        {
-                            return true;
-                        }
-                    }   
-                }
-            }
+        bool isgamewon(int n){
             
-            for (int i = 0; i < (FieldSize * (FieldSize - 1)) + 1; i += FieldSize)
-            {
 
-                if (Field[i] == n && Field[1] + Field[i] - 1 == n)
-                {
-                    int c = 0;
-                    for (int j = 0; j < FieldSize; j++)
-                    {
-                        if (Field[j] == n)
-                        {
-                            c++;
-                        }
-                        if (c == FieldSize)
-                        {
-                            return 0;
-                        }
-                    }
-                }  
-            }
+            
             return false;
         }
         
 };
 int main(){
-    game MyGame(10);
+    game MyGame(3);
     //checks if the square to be filled is already occupied
-    bool check = false;
     int user = 1;
     
     bool gameover = false;
 
     while (gameover == false)
     {
+        bool check = false;
         while (check == false)
         {
             if (MyGame.whatplayer(user) == 1){cout << "player1" << endl;}
@@ -127,15 +91,20 @@ int main(){
             cin >> input;
             check = MyGame.checkfield(MyGame.interpret(input));
             MyGame.writefield(MyGame.interpret(input),user);
-            user++;
-
             if (check == false)
             {
                 cout << "already occupied! try again." << endl;
             }
         }
-        gameover = MyGame.isgamewon();
-        cout << gameover;
+        user++;
+        gameover = MyGame.isgamewon(MyGame.whatplayer(user));
+        cout << gameover << endl;
+        for (int i = 0; i < 9; i++)
+        {
+            cout << MyGame.Field[i];
+        }
+        cout << endl;
+        
     }
     return 0;
 }
