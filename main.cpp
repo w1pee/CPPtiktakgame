@@ -62,19 +62,46 @@ class game
             return 2;
         }
         bool isgamewon(){
-            
+            int n = 1;
 
-            return 0;
-        }
-        int edgecounter(int n){
-            switch (n)
+            for (int i = 0; i < FieldSize; i++)
             {
-            case 1:
-                return 1;
-                break;
-            case 2:
-                
+                if (Field[i] == n && Field[i] + (FieldSize * (FieldSize - 1)) == n)
+                {
+                    int c = 0;
+                    for (int j = 1; j < Field[i] + (FieldSize * (FieldSize - 1)); j += FieldSize)
+                    {
+                        if(Field[j] == n){
+                            c++;
+                        }
+                        if (c == FieldSize)
+                        {
+                            return true;
+                        }
+                    }   
+                }
             }
+            
+            for (int i = 0; i < (FieldSize * (FieldSize - 1)) + 1; i += FieldSize)
+            {
+
+                if (Field[i] == n && Field[1] + Field[i] - 1 == n)
+                {
+                    int c = 0;
+                    for (int j = 0; j < FieldSize; j++)
+                    {
+                        if (Field[j] == n)
+                        {
+                            c++;
+                        }
+                        if (c == FieldSize)
+                        {
+                            return 0;
+                        }
+                    }
+                }  
+            }
+            return false;
         }
         
 };
@@ -101,13 +128,14 @@ int main(){
             check = MyGame.checkfield(MyGame.interpret(input));
             MyGame.writefield(MyGame.interpret(input),user);
             user++;
+
             if (check == false)
             {
                 cout << "already occupied! try again." << endl;
             }
         }
-
+        gameover = MyGame.isgamewon();
+        cout << gameover;
     }
-    
     return 0;
 }
