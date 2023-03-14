@@ -61,44 +61,22 @@ class game
             if (player % 2 != 0){return 1;}
             return 2;
         }
-        int isgamewon(){
-            for (int i = 0; i <= FieldSize * FieldSize; i++)
-            {
-                checkfield(i);
-            }
+        bool isgamewon(){
             
+
             return 0;
         }
-        bool checksquares(int field){
-            for (int i = 0; i < FieldSize; i++)
-            {
-                checksquare(field);
-            }
-        }
-        int checksquare(int Field){
-            switch (Field)
+        int edgecounter(int n){
+            switch (n)
             {
             case 1:
-                return Field - FieldSize + 1;
+                return 1;
+                break;
             case 2:
-                return Field - FieldSize;
-            case 3:
-                return Field - FieldSize + 1;
-            case 4:
-                return Field + 1;
-            case 5:
-                return Field + FieldSize + 1;
-            case 6:
-                return Field + FieldSize;
-            case 7:
-                return Field + FieldSize - 1;
-            case 8:
-                return Field - 1;
-            default:
-                cout << "Error: trying to check field that does not exist";
-                return 0;
+                
             }
         }
+        
 };
 int main(){
     game MyGame(10);
@@ -112,6 +90,11 @@ int main(){
     {
         while (check == false)
         {
+            if (MyGame.whatplayer(user) == 1){cout << "player1" << endl;}
+            else if (MyGame.whatplayer(user) == 2){cout << "player2" << endl;}
+            else{ cout << "something went wrong!" << endl;}
+            
+            
             cout << ">>";
             string input;
             cin >> input;
